@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>次方與根號運算器</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .container { max-width: 500px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+        input, select, button { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+        #output { background: #f4f4f4; padding: 10px; border-radius: 4px; min-height: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>次方/根號計算機</h2>
+    
+    <label for="x">輸入數字 x:</label>
+    <input type="number" id="x" placeholder="例如: 5">
+
+    <label for="opt">選擇運算:</label>
+    <select id="opt">
+        <option value="^">^ (次方)</option>
+        <option value="√">√ (根號)</option>
+    </select>
+
+    <label for="y">輸入數字 y:</label>
+    <input type="number" id="y" placeholder="例如: 6">
+
+    <button id="calculate" py-click="calculate_result">開始計算</button>
+
+    <div id="output">計算結果將顯示於此</div>
+</div>
+
+<script type="py">
+from pyscript import document
+
+def calculate_result(event):
+    # 取得網頁輸入值
+    try:
+        x = float(document.querySelector("#x").value)
+        y = float(document.querySelector("#y").value)
+        opt = document.querySelector("#opt").value
+        output_div = document.querySelector("#output")
+
+        if opt == "^":
+            result = x ** y
+        elif opt == "√":
+            if y == 0:
+                result = "數學不能 0 次方根"
+            else:
+                result = x ** (1/y)
+        else:
+            result = "請選擇運算方式"
+
+        output_div.innerText = f"結果: {result}"
+    except Exception as e:
+        document.querySelector("#output").innerText = "請輸入有效的數字"
+</script>
+
+</body>
+</html>
