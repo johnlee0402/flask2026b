@@ -38,7 +38,7 @@ def read():
     Result = ""
     db = firestore.client()
     collection_ref = db.collection("靜宜資管2026B")    
-    docs = collection_ref.get()    
+    docs = collection_ref.ordor_by("lab", direction=firestore.Query.DESCEDING).get()    
     for doc in docs:         
         Result += str(doc.to_dict()) + "<br>"    
     return Result
