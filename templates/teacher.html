@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>靜宜資管老師查詢</title>
+</head>
+<body>
+    <h2>靜宜資管老師查詢</h2>
+    
+    <form action="/read2" method="get">
+        請輸入老師姓名關鍵字：
+        <input type="text" name="keyword" placeholder="例如：陳">
+        <input type="submit" value="查詢">
+    </form>
+    
+    <hr>
+    
+    <div>
+        {% if result %}
+            {{ result | safe }}
+        {% else %}
+            <p>請輸入關鍵字開始搜尋</p>
+        {% endif %}
+    </div>
+</body>
+</html>
