@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人求職履歷 - 遊戲程式設計師</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Microsoft JhengHei', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            <span class="font-bold text-xl text-blue-600">Resume.</span>
+            <div class="space-x-4">
+                <a href="#about" class="hover:text-blue-500">關於我</a>
+                <a href="#job" class="hover:text-blue-500">目標職位</a>
+                <a href="#skills" class="hover:text-blue-500">專業技能</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-gradient text-white py-20 px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">哈喽，我是李孟翰</h1>
+        <p class="text-xl text-gray-300">熱愛遊戲開發的 MIS 工程師 | 追求極致的遊戲體驗</p>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-12 space-y-16">
+        
+        <section id="about" class="bg-white p-8 rounded-2xl shadow-md">
+            <h2 class="text-2xl font-bold border-l-4 border-blue-500 pl-4 mb-6">職涯目標與背景</h2>
+            <p class="leading-relaxed mb-4">
+                根據 <strong>104 興趣何倫碼測驗</strong>，我的性格傾向於「研究型 (I)」與「藝術型 (A)」。我對邏輯架構感興趣，同時熱衷於創造虛擬世界。
+            </p>
+            <p class="leading-relaxed">
+                目前就讀於靜宜大學資管系，我發現遊戲程式開發不僅需要深厚的資訊管理邏輯，更需要高度的系統優化能力，這正是我所追求的方向。
+            </p>
+        </section>
+
+        <section id="job" class="grid md:grid-cols-2 gap-8 items-start">
+            <div class="bg-blue-50 p-8 rounded-2xl">
+                <h2 class="text-2xl font-bold text-blue-700 mb-4">目標工作：遊戲程式設計師</h2>
+                <ul class="space-y-3">
+                    <li><strong>公司範例：</strong> 雷亞遊戲 (Rayark Inc.)</li>
+                    <li><strong>主要職責：</strong> 遊戲核心邏輯開發、物理系統實作、性能優化。</li>
+                    <li><strong>職位需求：</strong> 熟悉 C# 或 C++，具備 Unity 或 Unreal 引擎經驗，了解基本演算法。</li>
+                </ul>
+            </div>
+            <div class="p-8">
+                <h2 class="text-2xl font-bold mb-4">為何我適合此職位？</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    我有紮實的程式基礎，曾開發過 <strong>Dumbbell Alarm Clock Android App</strong>，對感測器與事件驅動邏輯非常熟悉。
+                    身為 MIS 學生，我比一般開發者更懂資料庫與後端串接，能有效處理遊戲中的數據存檔與連線功能。
+                </p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="text-2xl font-bold text-center mb-10">專業技能與未來規劃</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center border hover:border-blue-300 transition">
+                    <div class="text-blue-500 font-bold mb-2">Unity / C#</div>
+                    <div class="text-sm text-gray-500">基礎開發</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center border hover:border-blue-300 transition">
+                    <div class="text-blue-500 font-bold mb-2">Python</div>
+                    <div class="text-sm text-gray-500">數據處理</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center border hover:border-blue-300 transition">
+                    <div class="text-blue-500 font-bold mb-2">Android</div>
+                    <div class="text-sm text-gray-500">App 實作</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center border hover:border-blue-300 transition">
+                    <div class="text-blue-500 font-bold mb-2">ERP</div>
+                    <div class="text-sm text-gray-500">規劃師認證</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 text-white p-8 rounded-2xl text-center">
+            <h2 class="text-2xl font-bold mb-4">未來學習規劃</h2>
+            <p class="text-gray-400 mb-6">在大二這段時間，我計畫參加以下課程與研習：</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="bg-gray-700 px-4 py-2 rounded-full text-sm">進階演算法與資料結構</span>
+                <span class="bg-gray-700 px-4 py-2 rounded-full text-sm">3D 建模與動畫基礎</span>
+                <span class="bg-gray-700 px-4 py-2 rounded-full text-sm">遊戲引擎物理學研習</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-12 text-gray-400 text-sm">
+        &copy; 2026 李孟翰. Built with Tailwind CSS and deployed on Vercel.
+    </footer>
+
+</body>
+</html>
