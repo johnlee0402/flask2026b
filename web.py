@@ -35,7 +35,22 @@ def index():
     link += "<a href=/math>次方與根號計算</a><hr>"
     link += "<a href=/read>讀取Firestore資料</a><hr>"
     link += "<a href=/read2>讀取Firestore資料(根據姓名關鍵字)</a><hr>"
+    link += "<a href=/spider1>爬蟲子青老師本學期課程</a><hr>"
     return link
+
+@app.route("/spider1")
+def spider1():
+    Result = ""
+    url = "https://www1.pu.edu.tw/~tcyang/course.html"
+    Data = requests.get(url,verify=False)
+    Data.encoding = "utf-8"
+    sp = BeautifulSoup(Data.text, "html.parser")
+    result=sp.select(".team-box a")
+
+    for i in result:
+        Result += i.text + i.get("href") + "<br>"
+    return Result
+
 
 @app.route("/read2")
 def read2():
