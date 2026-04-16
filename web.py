@@ -36,7 +36,12 @@ def index():
     link += "<a href=/read>讀取Firestore資料</a><hr>"
     link += "<a href=/read2>讀取Firestore資料(根據姓名關鍵字)</a><hr>"
     link += "<a href=/spider1>爬蟲子青老師本學期課程</a><hr>"
+    link += "<a href=/job>個人求職履歷</a><hr>"
     return link
+
+@app.route("/job")
+def job():
+    return render_template("job.html")
 
 @app.route("/spider1")
 def spider1():
