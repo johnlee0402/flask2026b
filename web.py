@@ -35,7 +35,7 @@ def index():
     return link
 
 @app.route("/read2")
-def read():
+def read2():
     Result = ""
     keyword = '楊'
     db = firestore.client()
@@ -44,11 +44,12 @@ def read():
     for doc in docs:   
         teacher = doc.to_dict()
         if keyword in teacher["name"]:   
-            Result += str(teacher) + "<br>"    
-    return Result
+            Result += str(teacher) + "<br>"  
+    return Result  
 
-if Result == "":
-    Result = "抱歉，查無此關鍵字姓名"
+    if Result == "":
+        Result = "抱歉，查無此關鍵字姓名"
+    return Result
 
 @app.route("/read")
 def read():
