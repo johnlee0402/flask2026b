@@ -37,7 +37,51 @@ def index():
     link += "<a href=/read2>讀取Firestore資料(根據姓名關鍵字)</a><hr>"
     link += "<a href=/spider1>爬蟲子青老師本學期課程</a><hr>"
     link += "<a href=/job>個人求職履歷</a><hr>"
+    link += "<a href=/movie1>即將上映電影</a><hr>"
     return link
+
+@app.route("/movie1")
+def movie1():
+    keyword = request.args.get("q", "")
+
+    R = "<h2>電影搜尋系統</h2>"
+    R += """
+        <form action="/movie1" method="get">
+            <input type="text" name="q" placeholder="輸入片名關鍵字..." value="{}">
+            <button type="submit">搜尋電影</button>
+        </form>
+        <hr>
+    """.format(keyword)
+
+    url = "https://www.atmovies.com.tw/movie/next/"
+    try:
+        data = requests.get(url)
+        data.encoding = "utf-8"
+        sp = BeautifulSoup(data.text, "html.parser")
+        result = sp.select(".filmListAllX li")
+        
+        found_count = 0
+        for item in result:
+            title = item.find("img").get("alt")
+            
+            if keyword in title:
+                found_count += 1
+                introduce = "https://www.atmovies.com.tw" + item.find("a").get("href")
+                post = "https://www.atmovies.com.tw" + item.find("img").get("src")
+                
+                R += f"<div>"
+                R += f"  <a href='{introduce}' style='text-decoration:none;'><strong>{title}</strong></a><br>"
+                R += f"  <img src='{post}' style='width:180px; margin-top:10px; border-radius:5px;'><br><br>"
+                R += f"</div>"
+
+        if found_count == 0:
+            R += f"<p>找不到包含『{keyword}』的相關電影。</p>"
+            
+    except Exception as e:
+        R += f"發生錯誤: {e}"
+
+    return R
+
 
 @app.route("/job")
 def job():
