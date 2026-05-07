@@ -65,11 +65,18 @@ def road():
 
         data = response.json()
 
+        # 1. 遍歷資料並串接字串
         for item in data:
-            R += item["路口名稱"] + "原因:"+ item["主要肇因"] + "<br>"
+            R += f"{item['路口名稱']} 原因: {item['主要肇因']}<br>"
+
+        # 2. 計算總件數並加到字串末尾
+        total_count = len(data)
+        R += f"<br><b>總計事件數：{total_count} 件</b>"
 
     except Exception as e:
+        R = f"發生錯誤: {e}"
         print("發生錯誤:", e)   
+
     return R
 
 @app.route("/searchMovie")
