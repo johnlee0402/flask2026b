@@ -49,25 +49,30 @@ def index():
 def webhook3():
     # build a request object
     req = request.get_json(force=True)
+    
     # fetch queryResult from json
-    action =  req["queryResult"]["action"]
-    msg =  req["queryResult"]["queryText"]
-    info = "我是李孟翰設計的機器人,動作：" + action + "； 查詢內容：" + msg
-
+    action = req["queryResult"]["action"]
+    msg = req["queryResult"]["queryText"] # 已修正點號錯誤
+    
     if (action == "rateChoice"):
-        rate =  req["queryResult"]["parameters"]["rate"]
+        rate = req["queryResult"]["parameters"]["rate"]
         info = "我是李孟翰設計的機器人,您選擇的電影分級是：" + rate + "，相關電影：\n"
+        
         db = firestore.client()
-        collection_ref = db.collection("本週新片含分級")
-        docs = collection_ref.get()
+        # 建議直接用查詢過濾
+        docs = db.collection("本週新片含分級").where("rate", "==", rate).get()
+        
         result = ""
         for doc in docs:
-            dict = doc.to_dict()
-            if rate in dict["rate"]:
-                result += "片名：" + dict["title"] + "\n"
-                result += "介紹：" + dict["hyperlink"] + "\n\n"
+            movie_data = doc.to_dict()
+            result += "片名：" + movie_data["title"] + "\n"
+            result += "介紹：" + movie_data["hyperlink"] + "\n\n"
+        
+        if not result:
+            result = "目前查無此分級的電影。"
         info += result
-
+    else:
+        info = "我是李孟翰設計的機器人,動作：" + action + "； 查詢內容：" + msg
 
     return make_response(jsonify({"fulfillmentText": info}))
 
