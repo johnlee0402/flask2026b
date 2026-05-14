@@ -47,16 +47,42 @@ def index():
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
-    # build a request object
+    # 建立 request 物件
     req = request.get_json(force=True)
-    # fetch queryResult from json
-    action =  req["queryResult"]["action"]
-    #msg =  req.["queryResult"]["queryText"]
-    #info = "我是李孟翰設計的機器人,動作：" + action + "； 查詢內容：" + msg
-
+    
+    # 取得 action
+    action = req["queryResult"]["action"]
+    
     if (action == "rateChoice"):
-        rate =  req["queryResult"]["parameters"]["rate"]
-        info = "我是李孟翰設計的機器人,您選擇的電影分級是：" + rate
+        # 1. 取得使用者選擇的分級 (例如：普遍級、輔12級)
+        rate = req["queryResult"]["parameters"]["rate"]
+        
+        # 2. 爬取開眼電影網新片頁面
+        url = "https://www.atmovies.com.tw/movie/new/"
+        res = requests.get(url)
+        res.encoding = "utf-8"
+        soup = BeautifulSoup(res.text, "html.parser")
+        
+        # 3. 搜尋所有電影項目
+        # 開眼電影網新片列表在 .filmListAllX li 之中
+        movie_items = soup.select(".filmListAllX li")
+        
+        recommend_list = []
+        for item in movie_items:
+            # 檢查分級圖片的 alt 屬性是否符合使用者選的分級
+            rate_img = item.select_one("img[src*='images/cer_']")
+            if rate_img and rate in rate_img.get("alt", ""):
+                # 取得片名
+                title = item.select_one(".filmtitle a").text.strip()
+                recommend_list.append(title)
+        
+        # 4. 根據爬蟲結果組合回覆文字
+        if recommend_list:
+            # 串接前 3 部電影
+            movie_names = "、".join(recommend_list[:3])
+            info = f"我是李孟翰設計的機器人。根據您的分級【{rate}】，推薦新片有：{movie_names}"
+        else:
+            info = f"我是李孟翰設計的機器人。目前新片中沒有找到符合【{rate}】的分級電影喔！"
 
     return make_response(jsonify({"fulfillmentText": info}))
 
