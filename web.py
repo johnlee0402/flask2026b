@@ -45,8 +45,8 @@ def index():
     link += "<a href=/rate>本周新片</a><hr>"
     return link
 
-@app.route("/webhook3", methods=["POST"])
-def webhook3():
+@app.route("/webhook", methods=["POST"])
+def webhook():
     # build a request object
     req = request.get_json(force=True)
     # fetch queryResult from json
