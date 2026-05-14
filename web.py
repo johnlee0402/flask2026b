@@ -51,7 +51,7 @@ def webhook3():
     req = request.get_json(force=True)
     # fetch queryResult from json
     action =  req["queryResult"]["action"]
-    msg =  req.["queryResult"]["queryText"]
+    msg =  req["queryResult"]["queryText"]
     info = "我是李孟翰設計的機器人,動作：" + action + "； 查詢內容：" + msg
 
     if (action == "rateChoice"):
